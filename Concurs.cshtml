@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.10/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="~/js/site2.js" asp-append-version="true"></script>
+    <link type="text/css" rel="stylesheet" href="~/css/concurs.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Выгрузка Конкурсов</h1>
+    </div>
+
+    <div class="wrap">
+        <div style="width: 30%;">
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-0" id="editable-textarea" onfocus="enableEditing()">АИИС КУЭ</textarea>
+                <input checked data-index="0" id="checkbox-0" type="checkbox" />
+                <label for="checkbox-0"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-1" id="editable-textarea" onfocus="enableEditing()">Метрологического</textarea>
+                <input checked data-index="1" id="checkbox-1" type="checkbox" />
+                <label for="checkbox-1"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-2" id="editable-textarea" onfocus="enableEditing()">метрологическое</textarea>
+                <input checked data-index="2" id="checkbox-2" type="checkbox" />
+                <label for="checkbox-2"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-3" id="editable-textarea" onfocus="enableEditing()">метрология</textarea>
+                <input checked data-index="3" id="checkbox-3" type="checkbox" />
+                <label for="checkbox-3"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-4" id="editable-textarea" onfocus="enableEditing()">системы коммерческого учета</textarea>
+                <input checked data-index="4" id="checkbox-4" type="checkbox" />
+                <label for="checkbox-4"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-5" id="editable-textarea" onfocus="enableEditing()">системы технического учета</textarea>
+                <input checked data-index="5" id="checkbox-5" type="checkbox" />
+                <label for="checkbox-5"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-6" id="editable-textarea" onfocus="enableEditing()">системы интеллектуального учета</textarea>
+                <input checked data-index="6" id="checkbox-6" type="checkbox" />
+                <label for="checkbox-6"></label>
+            </div>
+            <div class="block">
+                <textarea rows="1" cols="20" class="index-7" id="editable-textarea" onfocus="enableEditing()">поверка счетчиков</textarea>
+                <input checked data-index="7" id="checkbox-7" type="checkbox" />
+                <label for="checkbox-7"></label>
+            </div>
+            <div id="fetchContracts" class='button -regular center'>Выгрузить</div>
+            <div id="downloadButton" class='button -regular center'>Скачать</div>
+
+            <div class="loader">
+                <img class="gif" src="~/gif/cats.gif" alt="Loading...">
+            </div>
+        </div>
+            <div style="width: 80%;">
+                <div class="tab-box">
+                <div id="tab0" class="tab is-active">1</div>
+                <div id="tab1" class="tab">2</div>
+                <div id="tab2" class="tab">3</div>
+                <div id="tab3" class="tab">4</div>
+                <div id="tab4" class="tab">5</div>
+                <div id="tab5" class="tab">6</div>
+                <div id="tab6" class="tab">7</div>
+                <div id="tab7" class="tab">8</div>
+            </div><!-- tab-box -->
+
+
+            <div class="tab-content is-current">
+                <p id="tableName1" >box01</p>
+                <table class="table1" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName2">box02</p>
+                <table class="table2" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName3">box03</p>
+                <table class="table3" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName4">box04</p>
+                <table class="table4" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName5">box05</p>
+                <table class="table5" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName6">box06</p>
+                <table class="table6" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName7">box07</p>
+                <table class="table7" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+
+            <div class="tab-content">
+                <p id="tableName8">box08</p>
+                <table class="table8" id="keywords" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                        <th>Наименование</th>
+                        <th>Размещено</th>
+                        <th>Подача заявок</th>
+                        <th>Начальная цена</th>
+                        <th>Ссылка к Источнику</th>
+                        <th>Тип</th>
+                        <th>Способ размещения</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.tab-content -->
+        </div>
+    </div>
+
+    
+
+
+    <script>
+        $(document).ready(function () {
+            let DopIndex = "";
+
+            if ("@User.Identity?.Name" != "test@mss-consult.ru") {
+                DopIndex = "/program";
+            }
+
+            const editableTextarea1 = document.querySelector('.index-0');
+            const editableTextarea2 = document.querySelector('.index-1');
+            const editableTextarea3 = document.querySelector('.index-2');
+            const editableTextarea4 = document.querySelector('.index-3');
+            const editableTextarea5 = document.querySelector('.index-4');
+            const editableTextarea6 = document.querySelector('.index-5');
+            const editableTextarea7 = document.querySelector('.index-6');
+            const editableTextarea8 = document.querySelector('.index-7');
+
+            const tableName1 = document.getElementById('tableName1');
+            const tableName2 = document.getElementById('tableName2');
+            const tableName3 = document.getElementById('tableName3');
+            const tableName4 = document.getElementById('tableName4');
+            const tableName5 = document.getElementById('tableName5');
+            const tableName6 = document.getElementById('tableName6');
+            const tableName7 = document.getElementById('tableName7');
+            const tableName8 = document.getElementById('tableName8');
+
+            tableName1.textContent = editableTextarea1.value;
+            tableName2.textContent = editableTextarea2.value;
+            tableName3.textContent = editableTextarea3.value;
+            tableName4.textContent = editableTextarea4.value;
+            tableName5.textContent = editableTextarea5.value;
+            tableName6.textContent = editableTextarea6.value;
+            tableName7.textContent = editableTextarea7.value;
+            tableName8.textContent = editableTextarea8.value;
+
+            editableTextarea1.addEventListener('input', () => {
+                tableName1.textContent = editableTextarea1.value;
+            });
+            editableTextarea2.addEventListener('input', () => {
+                tableName2.textContent = editableTextarea2.value;
+            });
+            editableTextarea3.addEventListener('input', () => {
+                tableName3.textContent = editableTextarea3.value;
+            });
+            editableTextarea4.addEventListener('input', () => {
+                tableName4.textContent = editableTextarea4.value;
+            });
+            editableTextarea5.addEventListener('input', () => {
+                tableName5.textContent = editableTextarea5.value;
+            });
+            editableTextarea6.addEventListener('input', () => {
+                tableName6.textContent = editableTextarea6.value;
+            });
+            editableTextarea7.addEventListener('input', () => {
+                tableName7.textContent = editableTextarea7.value;
+            });
+            editableTextarea8.addEventListener('input', () => {
+                tableName8.textContent = editableTextarea8.value;
+            });
+
+
+
+
+
+            function Tab() {
+            this.trigger = $('.tab');
+            this.target  = $('.tab-content');
+            this.onClick();
+            };
+
+            Tab.prototype.onClick = function() {
+            var _this = this;
+            this.trigger.on('click', null, function(cl) {
+                var index = $(this).index();
+                if ($(this).hasClass('is-active')) {
+                _this.target.eq(index).css('display', 'block');
+                } else {
+                _this.target.css('display','none').eq(index).fadeIn('slow');
+                _this.trigger.removeClass('is-active');
+                $(this).addClass('is-active');
+                }
+                cl.preventDefault();
+            });
+            };
+
+            var Tabs = new Tab();
+
+            $('input[type=checkbox]').change(function () {
+                const index = $(this).data('index');
+                const textarea = document.querySelector(`.index-${index}`);
+                const checkbox = document.getElementById(`checkbox-${index}`);
+                const tab = document.getElementById(`tab${index}`);
+
+                if (checkbox.checked) {
+                textarea.style.backgroundColor = 'transparent';
+                textarea.style.color = 'rgb(0, 0, 0)';
+                tab.style.display = 'table-cell';
+                } else {
+                textarea.style.backgroundColor = 'rgba(0, 0, 0, 0.125)';
+                textarea.style.color = 'rgb(120, 119, 119)';
+                tab.style.display = 'none';
+                }
+            });
+
+            $('#downloadButton').hide();
+            $('#fetchContracts').click(function () {
+                $(this).hide();
+                $('.loader').show();
+
+                var promise = new Promise(function (resolve, reject) {
+
+                const checkbox0 = document.getElementById(`checkbox-0`);
+                const checkbox1 = document.getElementById(`checkbox-1`);
+                const checkbox2 = document.getElementById(`checkbox-2`);
+                const checkbox3 = document.getElementById(`checkbox-3`);
+                const checkbox4 = document.getElementById(`checkbox-4`);
+                const checkbox5 = document.getElementById(`checkbox-5`);
+                const checkbox6 = document.getElementById(`checkbox-6`);
+                const checkbox7 = document.getElementById(`checkbox-7`);
+
+
+                if (checkbox0.checked) {
+                    var checkedInput0 = document.querySelector(`.index-0`).value;
+                }
+                else {
+                    var checkedInput0 = "";
+                }
+                if (checkbox1.checked) {
+                    var checkedInput1 = document.querySelector(`.index-1`).value;
+                }
+                else {
+                    var checkedInput1 = "";
+                }
+                if (checkbox2.checked) {
+                    var checkedInput2 = document.querySelector(`.index-2`).value;
+                }
+                else {
+                    var checkedInput2 = "";
+                }
+                if (checkbox3.checked) {
+                    var checkedInput3 = document.querySelector(`.index-3`).value;
+                }
+                else {
+                    var checkedInput3 = "";
+                }
+                if (checkbox4.checked) {
+                    var checkedInput4 = document.querySelector(`.index-4`).value;
+                }
+                else {
+                    var checkedInput4 = "";
+                }
+                if (checkbox5.checked) {
+                    var checkedInput5 = document.querySelector(`.index-5`).value;
+                }
+                else {
+                    var checkedInput5 = "";
+                }
+                if (checkbox6.checked) {
+                    var checkedInput6 = document.querySelector(`.index-6`).value;
+                }
+                else {
+                    var checkedInput6 = "";
+                }
+                if (checkbox7.checked) {
+                    var checkedInput7 = document.querySelector(`.index-7`).value;
+                }
+                else {
+                    var checkedInput7 = "";
+                }
+
+
+                    if (checkbox7.checked) {
+                        var element = document.querySelector('#tab7');
+                        element.click();
+                    }
+                    if (checkbox6.checked) {
+                        var element = document.querySelector('#tab6');
+                        element.click();
+                    }
+                    if (checkbox5.checked) {
+                        var element = document.querySelector('#tab5');
+                        element.click();
+                    }
+                    if (checkbox4.checked) {
+                        var element = document.querySelector('#tab4');
+                        element.click();
+                    }
+                    if (checkbox3.checked) {
+                        var element = document.querySelector('#tab3');
+                        element.click();
+                    }
+                    if (checkbox2.checked) {
+                        var element = document.querySelector('#tab2');
+                        element.click();
+                    }
+                    if (checkbox1.checked) {
+                        var element = document.querySelector('#tab1');
+                        element.click();
+                    }
+                    if (checkbox0.checked) {
+                        var element = document.querySelector('#tab0');
+                        element.click();
+                    }
+
+
+
+
+
+                    $.ajax({
+                        url: DopIndex + "/Concurs/MainControllerTest",
+                        cache: false,
+                        dataType: "text",
+                        data: {checkedInput0, checkedInput1, checkedInput2, checkedInput3, checkedInput4, checkedInput5, checkedInput6, checkedInput7},
+                        success: function (response) {
+                            resolve(response);
+                        },
+                        error: function () {
+                            reject();
+                        }
+                    });
+                });
+
+                promise.then(function (response) {
+                    GetDataTable();
+                    alert("Выгрузка завершена")
+                    $('#downloadButton').show();
+                    $('#fetchContracts').show();
+                    $('.loader').hide();
+                }).catch(function () {
+                    alert("Выгрузка завершена с ошибкой")
+                    //$('#downloadButton').show();
+                    $('#fetchContracts').show();
+                    $('.loader').hide();
+                });
+            });
+        });
+
+        const downloadButton = document.getElementById('downloadButton');
+        const currentDate = new Date().toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\./g, '.');
+
+        downloadButton.addEventListener('click', () => {
+
+            let DopIndex = "";
+
+            if ("@User.Identity?.Name" != "test@mss-consult.ru") {
+                DopIndex = "/program";
+            }
+
+            const fileName = `Итог выгрузки ${currentDate}.xlsx`;
+            const fileUrl = DopIndex + '/Конкурсы/Итог выгрузка.xlsx';
+
+            $.ajax({
+                url: fileUrl,
+                method: 'GET',
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (data) {
+                    const url = window.URL.createObjectURL(data);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                }
+            });
+        });
+        function GetDataTable() {
+            // загрузка данных из файла
+            if ("@User.Identity?.Name" != "test@mss-consult.ru") {
+                DopIndex = "https://doc.sepenergo.ru/program/Конкурсы/Итог выгрузка.xlsx";
+            }
+            else {
+                DopIndex = "http://localhost:7032/Конкурсы/Итог выгрузка.xlsx";
+            }
+
+            
+            fetch(DopIndex)
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                // создание объекта Workbook
+                let workbook = XLSX.read(data, { type: 'array' });
+                // получение первой таблицы
+                try {
+                    let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                    // преобразование таблицы в массив объектов
+                    let rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    let table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table1').innerHTML = table;
+                } catch { }
+            // -------table 2--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[1]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table2').innerHTML = table;
+                } catch { }
+
+                // -------table 3--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[2]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table3').innerHTML = table;
+                } catch { }
+
+                // -------table 4--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[3]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table4').innerHTML = table;
+                } catch { }
+
+                // -------table 5--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[4]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table5').innerHTML = table;
+                } catch { }
+
+                // -------table 6--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[5]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table6').innerHTML = table;
+                } catch { }
+
+                // -------table 7--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[6]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    table = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table7').innerHTML = table;
+                } catch { }
+
+                // -------table 8--------
+                try {
+                    worksheet = workbook.Sheets[workbook.SheetNames[7]];
+                    // преобразование таблицы в массив объектов
+                    rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 }).slice(1);
+                    // создание строки таблицы
+                    ltable = '<table id="keywords" cellspacing="0" cellpadding="0"><thead><tr><th>Наименование</th><th>Размещено</th><th>Подача заявок</th><th>Начальная цена</th><th>Ссылка к Источнику</th><th>Тип</th><th>Способ размещения</th></tr></thead><tbody>';
+                    // добавление данных в таблицу
+                    rows.forEach(row => {
+                        if (row[0]) {
+                            table += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td><a href="${row[4]}" target="_blank">${row[4]}</a></td><td>${row[5]}</td><td>${row[6]}</td></tr>`;
+                        }
+                    });
+                    // добавление закрывающей строки таблицы
+                    table += '</tbody></table>';
+                    // добавление таблицы на страницу
+                    document.querySelector('.table8').innerHTML = table;
+                } catch { }
+
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>
